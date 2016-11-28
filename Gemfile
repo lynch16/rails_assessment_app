@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'pry'
 end
 
 group :development do
@@ -44,6 +45,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+#Devise Authorization
+gem 'devise'
 #OmniAuth Gmail Integration
 gem 'gmail'
 gem 'omniauth'
