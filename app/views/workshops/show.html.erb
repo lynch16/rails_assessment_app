@@ -1,0 +1,27 @@
+<%= @workshop.name %>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <caption>Current Skills</caption>
+    <tr>
+      <th>Title</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @workshop.skills.size == 0 %>
+      <tr>
+        <td colspan="6">No skills found.</td>
+      </tr>
+    <% else %>
+      <%@workshop.skills.each do |skill|%>
+      <tr>
+        <td><%=skill.title%> </td>
+        <td><%= link_to "Edit Skill", edit_skill_path(skill), class: "btn btn-warning"  %> </td>
+        <td><%= link_to "Remove Skill", destroy_skill_path(skill), :method => :delete, class: "btn btn-danger"  %> </td>
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>

@@ -15,12 +15,12 @@ printing = Workshop.create(name: '3D Printing', officer: user_3)
 metalworking = Workshop.create(name: 'Metalworking', officer: user_2)
 woodworking = Workshop.create(name: 'Woodworking', officer: user_1)
 
-print_skill_1 = Skill.create(name: "turn machine on", workshop: printing)
-print_skill_2 = Skill.create(name: "turn machine off", workshop: printing)
-metal_skill_1 = Skill.create(name: "wear gloves", workshop: metalworking)
-metal_skill_2 = Skill.create(name: "metal is hot", workshop: metalworking)
-wood_skill_1 = Skill.create(name: "splinters hurt", workshop: woodworking)
-wood_skill_2 = Skill.create(name: "Don't cut your fingers off", workshop: woodworking)
+print_skill_1 = Skill.create(title: "turn machine on", workshop: printing)
+print_skill_2 = Skill.create(title: "turn machine off", workshop: printing)
+metal_skill_1 = Skill.create(title: "wear gloves", workshop: metalworking)
+metal_skill_2 = Skill.create(title: "metal is hot", workshop: metalworking)
+wood_skill_1 = Skill.create(title: "splinters hurt", workshop: woodworking)
+wood_skill_2 = Skill.create(title: "Don't cut your fingers off", workshop: woodworking)
 
 user_1.skills = [print_skill_2, print_skill_1, wood_skill_2]
 user_2.skills = [metal_skill_2, metal_skill_1]

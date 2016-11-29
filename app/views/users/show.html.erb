@@ -16,7 +16,7 @@
         <div id="collapse<%=workshop.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=workshop.id%>">
           <div class="panel-body">
             <% workshop.skills.each do |skill| %>
-              <li class="<%=@user.has_skill(skill)%>"><%= skill.name %></li>
+              <li class="<%=@user.has_skill(skill)%>"><%= skill.title %></li>
             <% end %>
           </div>
         </div>

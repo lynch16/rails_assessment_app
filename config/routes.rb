@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   root to: 'users#index'
   resources :users, except: [:destroy]
   resources :workshops
+  resources :skills
+
+  delete 'skill/:id/destroy', to: 'skills#destroy', as: 'destroy_skill'
 end

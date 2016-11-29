@@ -13,7 +13,8 @@
 ActiveRecord::Schema.define(version: 20161129161352) do
 
   create_table "skills", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
+    t.string   "content"
     t.integer  "workshop_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
