@@ -1,13 +1,11 @@
-
-
 <div class="row shadow">
   <div class="col-sm-12">
     <h2><%= @user.name %> </h2>
     <h3><%= @user.email %> </h3>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <% @workshops.each do |workshop| %>
       <div class="panel panel-default">
-        <% @workshops.each do |workshop| %>
         <div class="panel-heading" role="tab" id="heading<%=workshop.id%>">
           <h4 class="panel-title <%=@user.has_workshop(workshop)%>">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=workshop.id%>" aria-expanded="false" aria-controls="collapse<%=workshop.id%>">
@@ -22,8 +20,8 @@
             <% end %>
           </div>
         </div>
-        <% end %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
