@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129153024) do
+ActiveRecord::Schema.define(version: 20161129161352) do
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "workshop_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["workshop_id"], name: "index_skills_on_workshop_id"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "skill_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -25,7 +43,6 @@ ActiveRecord::Schema.define(version: 20161129153024) do
     t.string   "last_sign_in_ip"
     t.string   "provider"
     t.string   "uid"
-    t.string   "name"
     t.string   "image"
     t.string   "oauth_token"
     t.string   "oauth_refresh_token"

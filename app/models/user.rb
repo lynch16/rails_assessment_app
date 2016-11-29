@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :skills
+  has_many :user_skills
+  has_many :skills, through: :user_skills
   has_many :workshops, through: :skills
 
   validates :name, presence: true, uniqueness: true
@@ -29,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def allowed_workshops
+    workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact
   end
-
 
 end

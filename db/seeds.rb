@@ -11,13 +11,16 @@ user_2 = User.create(name: 'Jenna Loranger', email: 'jenna@mht.com', password: '
 user_3 = User.create(name: 'Dan P', email: 'dan@mht.com', password: 'password')
 user_4 = User.create(name: 'Ryan R', email: 'ryan@mht.com', password: 'password')
 
-3d_printing = Workshop.create(name: '3D Printing')
-metalworking = Workshop.create(name: 'Metalworking')
-woodworking = Workshop.create(name: 'Woodworking')
+printing = Workshop.create(name: '3D Printing', officer: user_3)
+metalworking = Workshop.create(name: 'Metalworking', officer: user_2)
+woodworking = Workshop.create(name: 'Woodworking', officer: user_1)
 
-print_skill_1 = Skill.create(name: "turn machine on", workshop: 3d_printing)
-print_skill_2 = Skill.create(name: "turn machine off", workshop: 3d_printing)
+print_skill_1 = Skill.create(name: "turn machine on", workshop: printing)
+print_skill_2 = Skill.create(name: "turn machine off", workshop: printing)
 metal_skill_1 = Skill.create(name: "wear gloves", workshop: metalworking)
 metal_skill_2 = Skill.create(name: "metal is hot", workshop: metalworking)
 wood_skill_1 = Skill.create(name: "splinters hurt", workshop: woodworking)
 wood_skill_2 = Skill.create(name: "Don't cut your fingers off", workshop: woodworking)
+
+user_1.skills = [print_skill_2, print_skill_1, wood_skill_2]
+user_2.skills = [metal_skill_2, metal_skill_1]
