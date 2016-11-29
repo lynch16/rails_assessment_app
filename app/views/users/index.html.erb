@@ -1,0 +1,22 @@
+<table class="table table-bordered table-striped">
+	<thead>
+		<caption>UsersController List</caption>
+		<tr>
+			<th>Name</th>
+      <th>Allowed Workshops</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @users.size == 0 %>
+			<tr>
+				<td colspan="6">No members found.</td>
+			</tr>
+		<% else %>
+			<% @users.each do |user| %>
+						<td><%= link_to "#{user.name}", user_path(user) %></td>
+	          <td><%= user.allowed_workshops.pluck(:name).join(", ") %> </td>
+			   	</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>

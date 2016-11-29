@@ -13,37 +13,146 @@
  *= require_tree .
  *= require_self
  */
- #customBtn {
-       display: inline-block;
-       background: white;
-       color: #444;
-       width: 190px;
-       border-radius: 5px;
-       border: thin solid #888;
-       box-shadow: 1px 1px 1px grey;
-       white-space: nowrap;
-     }
-#customBtn:hover {
- cursor: pointer;
+ @import "bootstrap";
+
+ .skilled {
+   color: green;
+ }
+
+ .unskilled {
+   color: red;
+ }
+
+ .card {
+   background-color: #EEE;
+   border-radius: 5px;
+   padding: 10px;
+   margin: 10px;
+   display: inline-block;
+   vertical-align: middle;
+ }
+
+.expired {
+  color: red;
 }
-span.label {
- font-family: serif;
- font-weight: normal;
+
+.expiring {
+  color: orange;
 }
-span.icon {
- background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
- display: inline-block;
- vertical-align: middle;
- width: 42px;
- height: 42px;
+
+.current {
+  color: green;
 }
-span.buttonText {
- display: inline-block;
- vertical-align: middle;
- padding-left: 42px;
- padding-right: 42px;
- font-size: 14px;
- font-weight: bold;
- /* Use the Roboto font that is loaded in the <head> */
- font-family: 'Roboto', sans-serif;
+
+.well {
+  display: inline-block;;
+}
+/* ///// GLOBAL //////*/
+.block_links h3+p a {
+    display: block;
+}
+.shadow{
+    box-shadow: 0 3px 10px #333;
+}
+
+
+footer {
+    text-align: center;
+    font-size: .75em;
+    padding: 10px;
+    background: #eee;
+    border-top: 1px solid;
+}
+
+
+@media only screen and (max-width: 768px) {
+    #details [class*="col-"] {
+        height: auto;
+    }
+
+    #details .border {
+        border-bottom: 1px dotted #333;
+    }
+
+    #details h3 {
+        text-align: left;
+        font-size: 1.5em;
+    }
+    #details #social {
+        width: auto;
+    }
+    #details #social a{
+        display: inline-block;
+    }
+
+    #details #hide {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #details #social {
+        visibility: hidden;
+    }
+
+    #details #hide a {
+        display: block;
+    }
+}
+
+/* //////// BACKGROUND ///// */
+.background {
+    background: url(../images/shiplap.jpg) no-repeat center top;
+    background-size: cover;
+}
+
+.grey-gradient {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5bdc8+0,828c95+36,28343b+100&0.25+0,1+100;Grey+Black+3D */
+    background: -moz-linear-gradient(top,  rgba(181,189,200,0.25) 0%, rgba(130,140,149,0.52) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(181,189,200,0.25) 0%,rgba(130,140,149,0.52) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(181,189,200,0.25) 0%,rgba(130,140,149,0.52) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+}
+.light-grey {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.yellow {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+98&1+1,0.3+100 */
+    background: -moz-linear-gradient(top,  rgba(254,252,234,1) 0%, rgba(254,252,232,1) 1%, rgba(241,218,54,0.31) 98%, rgba(241,218,54,0.3) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(254,252,234,1) 0%,rgba(254,252,232,1) 1%,rgba(241,218,54,0.31) 98%,rgba(241,218,54,0.3) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(254,252,234,1) 0%,rgba(254,252,232,1) 1%,rgba(241,218,54,0.31) 98%,rgba(241,218,54,0.3) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#4df1da36',GradientType=0 ); /* IE6-9 */
+}
+
+/*/////// MEDIA ////////*/
+
+img, video, audio, iframe, table, form {
+  width: 100%; /* IE */
+  max-width: 100%; /* FF, Safari, Chrome */
+}
+
+/* /////// FIXES /////// */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+}
+
+.clear {
+  clear:both;
 }

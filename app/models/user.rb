@@ -3,7 +3,6 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :workshops, through: :skills
 
-  validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,7 +18,7 @@ class User < ApplicationRecord
       if registered_user
         return registered_user
       else
-        user = User.create(name: data["name"],
+        user = User.new(name: data["name"],
           provider:access_token.provider,
           email: data["email"],
           uid: access_token.uid ,
@@ -30,7 +29,15 @@ class User < ApplicationRecord
   end
 
   def allowed_workshops
-    workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact
+    workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact.uniq
+  end
+
+  def has_skill(skill)
+    if skills.include?(skill)
+      "skilled"
+    else
+      "unskilled"
+    end
   end
 
 end

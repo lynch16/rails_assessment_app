@@ -1,1 +1,28 @@
-Show page
+User Profile page <br>
+<%= @user.name %> <br>
+<%= @user.email %> <br>
+
+<div class="row shadow" id="blog">
+  <div class="col-sm-9 blog_feed">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <% Workshop.all.each do |workshop| %>
+        <div class="panel-heading" role="tab" id="heading<%=workshop.id%>">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=workshop.id%>" aria-expanded="true" aria-controls="collapse<%=workshop.id%>">
+              <%=workshop.name %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse<%=workshop.id%>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%=workshop.id%>">
+          <div class="panel-body">
+            <% workshop.skills.each do |skill| %>
+              <li class="<%=@user.has_skill(skill)%>"><%= skill.name %></li>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
