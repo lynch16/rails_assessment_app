@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @workshops = Workshop.all
     @user = User.find(params[:id])
   end
 

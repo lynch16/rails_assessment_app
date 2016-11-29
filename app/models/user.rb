@@ -40,4 +40,12 @@ class User < ApplicationRecord
     end
   end
 
+  def has_workshop(workshop)
+    if allowed_workshops.include?(workshop)
+      "skilled"
+    else
+      "unskilled"
+    end
+  end
+
 end
