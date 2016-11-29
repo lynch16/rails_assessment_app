@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  has_many :skills
+  has_many :workshops, through: :skills
+
+  validates :name, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,6 +25,11 @@ class User < ApplicationRecord
           password: Devise.friendly_token[0,20],
         )
       end
-   end
- end
+    end
+  end
+
+  def allowed_workshops
+  end
+
+
 end
