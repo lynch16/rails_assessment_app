@@ -1,4 +1,5 @@
-<%= @workshop.name %>
+<h1><%= @workshop.name %> </h2>
+<%= link_to "Add New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"  %>
 
 <table class="table table-bordered table-striped">
   <thead>

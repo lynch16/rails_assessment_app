@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :users, except: [:destroy] do
     resources :workshops, only: [:show, :index]
   end
-  resources :workshops
+  resources :workshops do
+    resources :skills, only: [:index, :new]
+  end
   resources :skills
 
   post '/users/search_by', to: 'users#search_by'

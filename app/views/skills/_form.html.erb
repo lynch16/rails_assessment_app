@@ -1,0 +1,8 @@
+<%= form_for @skill do |f| %>
+  <%= f.hidden_field :workshop_id %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.submit "Create New Skill" %>
+<%end%>
