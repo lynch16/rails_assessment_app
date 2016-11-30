@@ -8,7 +8,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:user_id] = @user.id
       sign_in_and_redirect @user, :event => :authentication
     else
-      redirect_to new_user_registration_url
+      redirect_to new_user_registration_url(@user), notice: "Please create a new account."
     end
   end
 end

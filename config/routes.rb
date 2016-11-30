@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'users#index'
-  resources :users, except: [:destroy]
+  resources :users, except: [:destroy] do
+    resources :workshops, only: [:show, :index]
+  end
   resources :workshops
   resources :skills
 
-  delete 'skill/:id/destroy', to: 'skills#destroy', as: 'destroy_skill'
+  post '/users/search_by', to: 'users#search_by'
+  delete '/skills/:id/destroy', to: 'skills#destroy', as: 'destroy_skill'
 end

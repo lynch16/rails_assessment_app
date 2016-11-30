@@ -15,8 +15,12 @@
         </div>
         <div id="collapse<%=workshop.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=workshop.id%>">
           <div class="panel-body">
-            <% workshop.skills.each do |skill| %>
-              <li class="<%=@user.has_skill(skill)%>"><%= skill.title %></li>
+            <% if workshop.skills.empty? %>
+              <%= "No skills requried for #{workshop.name}" %>
+            <% else %>
+              <% workshop.skills.each do |skill| %>
+                <li class="<%=@user.has_skill(skill)%>"><%= skill.title %></li>
+              <% end %>
             <% end %>
           </div>
         </div>

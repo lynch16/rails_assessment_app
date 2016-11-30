@@ -2,7 +2,11 @@ class WorkshopsController < ApplicationController
   before_action :set_workshop, only: [:show, :edit, :update]
 
   def index
-    @workshops = Workshop.all
+    if params[:user_id]
+      @workshops = User.find_by(id: params[:user_id]).workshops
+    else
+      @workshops = Workshop.all
+    end
   end
 
   def show

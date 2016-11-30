@@ -18,7 +18,7 @@ class User < ApplicationRecord
       if registered_user
         return registered_user
       else
-        user = User.new(name: data["name"],
+        user = User.create(name: data["name"],
           provider:access_token.provider,
           email: data["email"],
           uid: access_token.uid ,
@@ -26,6 +26,14 @@ class User < ApplicationRecord
         )
       end
     end
+  end
+
+  def self.search_by(field, value)
+    where(field => value)
+  end
+
+  def self.search_terms
+    ['id','name','email']
   end
 
   def allowed_workshops
@@ -41,11 +49,10 @@ class User < ApplicationRecord
   end
 
   def has_workshop(workshop)
-    if allowed_workshops.include?(workshop)
+    if allowed_workshops.include?(workshop) || workshop.skills.empty?
       "skilled"
     else
       "unskilled"
     end
   end
-
 end
