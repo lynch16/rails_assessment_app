@@ -16,6 +16,9 @@
           <li><%= link_to "Members", users_path, :class => 'navbar-link'  %> </li>
           <li><%= link_to "Workshops", workshops_path, :class => 'navbar-link'  %> </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right" id="auth">
+          <%= render 'layouts/auth' %>
+        </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
