@@ -7,8 +7,8 @@ class Workshop < ApplicationRecord
 
   validates :name, presence: :true, uniqueness: :true
 
-  def skills_attributes=(skillss_attributes)
-    skillss_attributes.values.each do |skill_attributes|
+  def skills_attributes=(skills_attributes)
+    skills_attributes.values.each do |skill_attributes|
       unless skill_attributes[:title].blank?
         self.skills.build(skill_attributes)
       end
