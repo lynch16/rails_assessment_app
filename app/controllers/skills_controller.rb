@@ -4,6 +4,9 @@ class SkillsController < ApplicationController
   def index
   end
 
+  def show
+  end
+
   def new
     @skill = Skill.new(workshop_id: params[:workshop_id])
   end
@@ -13,7 +16,7 @@ class SkillsController < ApplicationController
     if @skill.save
       redirect_to workshop_path(@skill.workshop_id), notice: 'New skill created successfully'
     else
-      render action: 'new', alert: 'Creation failed'
+      render action: 'new', alert: "Creation failed:  #{@skill.errors.full_messages}"
     end
   end
 
@@ -24,14 +27,18 @@ class SkillsController < ApplicationController
     if @skill.update(skill_params)
       redirect_to workshop_path(@skill.workshop_id), notice: 'Skill updated'
     else
-      render action: 'edit', notice: 'Update failed'
+      render action: 'edit', alert: "Update failed: #{@skill.errors.full_messages}"
     end
   end
 
   def destroy
     @workshop = @skill.workshop
     @skill.destroy
-    redirect_to workshop_path(@workshop), notice: 'Skill deleted'
+    if !!@workshop
+      redirect_to workshop_path(@workshop), notice: 'Skill deleted'
+    else
+      redirect_to workshops_path
+    end
   end
 
   private

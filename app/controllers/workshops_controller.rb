@@ -21,7 +21,7 @@ class WorkshopsController < ApplicationController
     if @workshop.save
       redirect_to @workshop, notice: 'Workshop created successfully'
     else
-      render action: 'new', alert: 'Creation failed'
+      render action: 'new', alert: "Creation failed:  #{@workshop.errors.full_messages}"
     end
   end
 
@@ -32,7 +32,7 @@ class WorkshopsController < ApplicationController
     if @workshop.update(workshop_params)
       redirect_to @workshop, notice: 'Workshop updated'
     else
-      render action: 'edit', notice: 'Update failed'
+      render action: 'edit', alert: "Update failed:  #{@workshop.errors.full_messages}"
     end
   end
 

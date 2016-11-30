@@ -4,7 +4,7 @@
     <div class="panel-heading" role="tab" id="heading<%=workshop.id%>">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=workshop.id%>" aria-expanded="false" aria-controls="collapse<%=workshop.id%>">
-          <%=workshop.name %> (Click to view skills) <%= link_to "Edit Workshop", edit_workshop_path(workshop), class: "btn btn-primary"  %>
+          <%=workshop.name %> (Click to view skills) <%= link_to "Edit Workshop", edit_workshop_path(workshop), class: "btn btn-primary card"  %>
         </a>
       </h4>
     </div>
@@ -12,6 +12,24 @@
       <div class="panel-body">
         <% workshop.skills.each do |skill| %>
           <li><%= skill.title %></li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% if !Skill.unassigned.empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOther">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOther" aria-expanded="false" aria-controls="collapseOther">
+          Unassigned Skills (Click to view skills)
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOther" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOther">
+      <div class="panel-body">
+        <% Skill.unassigned.each do |skill| %>
+          <li><%= link_to skill.title, edit_skill_path(skill) %></li>
         <% end %>
       </div>
     </div>

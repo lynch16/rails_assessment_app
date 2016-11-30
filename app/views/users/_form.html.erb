@@ -1,0 +1,15 @@
+<%= form_for @user do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+<br>
+  <%= f.label 'Skills:' %> <br>
+  <div class="form-group checkbox-list well">
+    <% Workshop.all.each do |workshop| %>
+      <%= f.label workshop.name %> <br>
+      <%= f.collection_check_boxes :skill_ids, workshop.skills, :id, :title %>
+    <% end %>
+  </div>
+  <br>
+  <%= f.submit "Update User" %>
+<% end %>

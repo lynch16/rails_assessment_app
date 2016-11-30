@@ -3,6 +3,16 @@
 
   <%= f.label :title %>
   <%= f.text_field :title %>
+<br>
+  <%= f.label "Which workshop is this for?" %>
+  <%= f.collection_radio_buttons :workshop_id, Workshop.all, :id, :name do |b| %>
+    <%= b.label(class: 'card') {b.radio_button + b.text}%>
+  <%end%>
 
-  <%= f.submit "Create New Skill" %>
+  <% if controller.action_name == 'new'%>
+    <%= f.submit "Create New Skill" %>
+  <% else%>
+    <%= f.submit "Update Skill" %>
+  <%end%>
+  <%= link_to "Remove Skill", destroy_skill_path(@skill), :method => :delete, class: "btn btn-danger"  %>
 <%end%>

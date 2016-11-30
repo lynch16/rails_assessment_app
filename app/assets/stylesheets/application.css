@@ -24,7 +24,7 @@
    margin-left: 10%;
    width: 80%;
  }
- 
+
  .skilled {
    color: green;
  }
@@ -35,6 +35,7 @@
 
  .card {
    background-color: #EEE;
+   color: #333;
    border-radius: 5px;
    padding: 10px;
    margin: 10px;
@@ -55,7 +56,7 @@
 }
 
 .well {
-  display: inline-block;;
+  display: block;
 }
 /* ///// GLOBAL //////*/
 .block_links h3+p a {

@@ -7,9 +7,7 @@
   <% if controller.action_name == 'edit'%>
     <h3> Skills: </h3>
     <% if @workshop.skills.size == 0 %>
-      <tr>
-        <td colspan="6">No skills found.</td>
-      </tr>
+        No skills found.
     <% else %>
       <div class="form-group checkbox-list well">
         <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
