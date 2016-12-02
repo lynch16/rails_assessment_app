@@ -1,13 +1,27 @@
 <%= form_for @skill do |f| %>
-  <%= f.hidden_field :workshop_id %>
+<% if @skill.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% @skill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-<br>
-  <%= f.label "Which workshop is this for?" %>
-  <%= f.collection_radio_buttons :workshop_id, Workshop.all, :id, :name do |b| %>
-    <%= b.label(class: 'card') {b.radio_button + b.text}%>
-  <%end%>
+  <%= f.hidden_field :workshop_id %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.label "Which workshop is this for?" %>
+    <%= f.collection_radio_buttons :workshop_id, Workshop.all, :id, :name do |b| %>
+      <%= b.label(class: 'card') {b.radio_button + b.text}%>
+    <%end%>
+  </div>
 
   <% if controller.action_name == 'new'%>
     <%= f.submit "Create New Skill" %>

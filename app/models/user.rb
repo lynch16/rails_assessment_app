@@ -1,7 +1,21 @@
+class MyValidator < ActiveModel::Validator
+  def validate(record)
+    unless !record.name.strip.blank?
+      record.errors[:name] << "cannot be blank"
+    end
+  end
+end
+
 class User < ApplicationRecord
+  include ActiveModel::Validations
+  validates_with MyValidator
+
   has_many :user_skills
   has_many :skills, through: :user_skills
   has_many :workshops, through: :skills
+
+  validates :name, format: { without: /[0-9]/, message: "does not allow numbers" }
+  validates :email, uniqueness: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

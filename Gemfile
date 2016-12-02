@@ -46,6 +46,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+#bootstrap
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.3', '>=3.3.6'
+gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
+
 #Devise Authorization
 gem 'devise'
 #OmniAuth Gmail Integration

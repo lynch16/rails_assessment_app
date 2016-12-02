@@ -1,6 +1,22 @@
+<div class="form-group">
+
 <%= form_for @user do |f| %>
-  <h4><%= f.label :name %>
-  <%= f.text_field :name %> </h4>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <h4><%= f.label :name %>
+    <%= f.text_field :name %> </h4>
+  </div>
 
   <h4><%= f.label 'Skills:' %> </h4>
   <% Workshop.all.each do |workshop| %>
@@ -13,3 +29,5 @@
   <br>
   <%= f.submit "Update User" %>
 <% end %>
+
+</div>

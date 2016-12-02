@@ -1,4 +1,15 @@
 <%= form_for @workshop do |f| %>
+<% if @workshop.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors:</h2>
+    <ul>
+      <% @workshop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
