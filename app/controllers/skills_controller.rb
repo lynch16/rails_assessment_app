@@ -43,7 +43,7 @@ class SkillsController < ApplicationController
 
   private
   def skill_params
-    params.require(:skill).permit(:title, :workshop_id)
+    params.require(:skill).permit(:title, :description, :workshop_id)
   end
 
   def set_skill

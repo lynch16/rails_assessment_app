@@ -20,7 +20,7 @@
               <%= "No skills requried for #{workshop.name}" %>
             <% else %>
               <% workshop.skills.each do |skill| %>
-                <li class="<%=@user.has_skill(skill)%>"><%= skill.title %></li>
+                <li class="<%=@user.skill_level(skill)%>"><%= skill.title %></li>
               <% end %>
             <% end %>
           </div>

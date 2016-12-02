@@ -1,7 +1,7 @@
--add fields_with_errors class to forms
+X-add fields_with_errors class to forms
 -Add description to skills
 -Add third column to user_skills - Skill level (1,2,3) for notice, intermediate, expert.  Only Experts are allowed to sign off other users on skills **only experts can train someone on a skill**
--Need to create validation to check names for invalid data.
+X-Need to create validation to check names for invalid data.
 
 Add officer functions
   -will want is_officer? helper method

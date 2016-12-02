@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :user_skills
   has_many :skills, through: :user_skills
   has_many :workshops, through: :skills
+  enum role: [:member, :admin]
 
   validates :name, format: { without: /[0-9]/, message: "does not allow numbers" }
   validates :email, uniqueness: true
@@ -54,12 +55,13 @@ class User < ApplicationRecord
     workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact.uniq
   end
 
-  def has_skill(skill)
-    if skills.include?(skill)
-      "skilled"
-    else
-      "unskilled"
-    end
+  def skill_level(skill)
+      user_skill = UserSkill.find_by(user_id: self.id, skill_id: skill.id)
+      if !user_skill
+        "unskilled"
+      else
+        user_skill.skill_level
+      end
   end
 
   def has_workshop(workshop)

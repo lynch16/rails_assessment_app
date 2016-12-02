@@ -33,8 +33,13 @@
    width: 80%;
  }
 
- .skilled {
+ .novice, .pro {
    color: green;
+ }
+
+ .expert {
+   color: green;
+   font-weight: bold;
  }
 
  .unskilled {

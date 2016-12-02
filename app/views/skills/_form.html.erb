@@ -17,6 +17,11 @@
   </div>
   <br>
   <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <br>
+  <div class="field">
     <%= f.label "Which workshop is this for?" %>
     <%= f.collection_radio_buttons :workshop_id, Workshop.all, :id, :name do |b| %>
       <%= b.label(class: 'card') {b.radio_button + b.text}%>
