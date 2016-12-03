@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || user_path(current_user) || root_path
   end
 
+  private
+  def is_officer?
+    unless current_user.admin? || @workshop.officer == current_user
+      redirect_to root_path, alert: "You are not allowed to access that page."
+    end
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])

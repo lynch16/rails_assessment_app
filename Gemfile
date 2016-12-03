@@ -51,7 +51,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3', '>=3.3.6'
 gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
 
-#Devise Authorization
+#Devise Authentication
 gem 'devise'
 #OmniAuth Gmail Integration
 gem 'gmail'

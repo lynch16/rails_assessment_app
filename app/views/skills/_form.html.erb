@@ -1,4 +1,4 @@
-<%= form_for @skill do |f| %>
+<%= form_for [@workshop, @skill] do |f| %>
 <% if @skill.errors.any? %>
   <div id="error_explanation">
     <h2>There were some errors:</h2>

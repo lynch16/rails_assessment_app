@@ -8,6 +8,7 @@ class SkillsController < ApplicationController
   end
 
   def new
+    @workshop = Workshop.find_by(id: params[:workshop_id])
     @skill = Skill.new(workshop_id: params[:workshop_id])
   end
 
@@ -47,7 +48,7 @@ class SkillsController < ApplicationController
   end
 
   def set_skill
-    @skill = Skill.find(params[:id])
+    @skill = Skill.find_by(id: params[:id])
   end
 
 end

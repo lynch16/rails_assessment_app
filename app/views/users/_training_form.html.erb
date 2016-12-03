@@ -1,0 +1,33 @@
+<div class="form-group">
+
+<%= form_for @user do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag 'workshop_id', @workshop.id %>
+
+  <div class="field">
+    <h4><%= f.label :name %>
+    <%= @user.name %> </h4>
+  </div>
+
+  <h4><%= f.label 'Skills:' %> </h4>
+    <h5>Workshop: <%= f.label @workshop.name %> </h5>
+
+    <div class="form-group checkbox-list well">
+      <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
+    </div>
+  <br>
+  <%= f.submit "Update User" %>
+<% end %>
+
+</div>

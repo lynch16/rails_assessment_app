@@ -2,15 +2,19 @@
 <% if !@workshop.officer.nil? %>
   <h3><%= "Officer: #{@workshop.officer.name}"%></h3>
 <%end%>
-<%= link_to "Add New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"  %>
-<%= link_to "Edit Workshop", edit_workshop_path(@workshop), class: "btn btn-primary"  %>
+<% if is_officer? || is_admin? %>
+  <%= link_to "Add New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"  %>
+  <%= link_to "Edit Workshop", edit_workshop_path(@workshop), class: "btn btn-primary"  %>
+<% end %>
 <table class="table table-bordered table-striped">
   <thead>
-    <caption>Current Skills</caption>
+    <caption>Required Skills</caption>
     <tr>
       <th>Title</th>
-      <th>Edit</th>
-      <th>Delete</th>
+      <% if is_officer? || is_admin? %>
+        <th>Edit</th>
+        <th>Delete</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -22,8 +26,10 @@
       <%@workshop.skills.each do |skill|%>
       <tr>
         <td><%=skill.title%> </td>
-        <td><%= link_to "Edit Skill", edit_workshop_skill_path(skill), class: "btn btn-warning"  %> </td>
-        <td><%= link_to "Remove Skill", destroy_skill_path(skill), :method => :delete, class: "btn btn-danger"  %> </td>
+        <% if is_officer? || is_admin? %>
+          <td><%= link_to "Edit Skill", edit_workshop_skill_path(@workshop, skill), class: "btn btn-warning"  %> </td>
+          <td><%= link_to "Remove Skill", workshop_skill_path(@workshop, skill), :method => :delete, class: "btn btn-danger"  %> </td>
+        <% end %>
       </tr>
       <%end%>
     <% end %>

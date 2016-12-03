@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :allowed?]
+  before_action :set_workshop, only: [:edit]
+  before_action :allowed?, only: [:edit, :update]
 
   def index
     @users = User.all
@@ -36,5 +38,16 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_workshop
+    @workshop = Workshop.find_by(id: params[:workshop_id])
+  end
+
+  def allowed?
+    set_workshop
+    unless current_user.admin? || @user == current_user || @workshop.try(:officer) == current_user
+      redirect_to root_path, alert: "You are not allowed to access that page."
+    end
   end
 end

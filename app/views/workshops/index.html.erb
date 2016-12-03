@@ -11,7 +11,11 @@
     <div id="collapse<%=workshop.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=workshop.id%>">
       <div class="panel-body">
         <% workshop.skills.each do |skill| %>
-          <li><%= link_to skill.title, edit_skill_path(skill) %></li>
+          <% if is_officer?(workshop) %>
+            <li><%= link_to skill.title, edit_skill_path(skill) %></li>
+          <% else %>
+            <li><%= skill.title %></li>
+          <%end%>
         <% end %>
       </div>
     </div>
@@ -29,7 +33,11 @@
     <div id="collapseOther" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOther">
       <div class="panel-body">
         <% Skill.unassigned.each do |skill| %>
-          <li><%= link_to skill.title, edit_skill_path(skill) %></li>
+          <% if is_admin? %>
+            <li><%= link_to skill.title, edit_skill_path(skill) %></li>
+          <% else %>
+            <li><%= skill.title %></li>
+          <%end%>
         <% end %>
       </div>
     </div>

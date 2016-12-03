@@ -2,7 +2,9 @@
   <div class="col-sm-12">
     <h2><%= @user.name %> </h2>
     <h3><%= @user.email %> </h3>
-    <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary card"  %>
+    <% if is_admin? || @user == current_user%>
+      <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary card"  %>
+    <% end %>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <% @workshops.each do |workshop| %>
@@ -11,6 +13,7 @@
           <h4 class="panel-title <%=@user.has_workshop(workshop)%>">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=workshop.id%>" aria-expanded="false" aria-controls="collapse<%=workshop.id%>">
               <%=workshop.name %>
+              <%= is_officer?(workshop) ? (link_to "Train", edit_workshop_user_path(workshop),  class: "btn btn-info") : ""%>
             </a>
           </h4>
         </div>

@@ -71,4 +71,11 @@ class User < ApplicationRecord
       "unskilled"
     end
   end
+
+  def teach_skill(student, current_user, skill)
+    teacher_skill = UserSkill.find_by(user_id: current_user.id, skill_id: skill.id)
+    unless !teacher_skill.expert?
+      student.skills << skill
+    end
+  end
 end

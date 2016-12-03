@@ -10,17 +10,39 @@
   </div>
 <% end %>
 
-  <div class="form-group">
+  <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
+
+  <br>
+  <% if is_admin? %>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOfficer">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOfficer" aria-expanded="false" aria-controls="collapseOfficer">
+            <%="Select Officer: "%> (Click to view list)
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOfficer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOfficer">
+        <div class="panel-body">
+          <div class="field checkbox-list well">
+            <%= f.collection_radio_buttons :user_id, User.all, :id, :name %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
 
   <% if controller.action_name == 'edit'%>
     <h3> Skills: </h3>
     <% if @workshop.skills.size == 0 %>
         No skills found.
     <% else %>
-      <div class="form-group checkbox-list well">
+      <div class="field checkbox-list well">
         <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
       </div>
     <%end%>
@@ -34,8 +56,8 @@
       <%=skills_fields.label :title %>
       <%=skills_fields.text_field :title %>
 
-      <%=skills_fields.label :content %>
-      <%=skills_fields.text_field :content %>
+      <%=skills_fields.label :description %>
+      <%=skills_fields.text_field :description %>
     <% end %>
     <%= f.add_nested_fields_link :skills %>
   </div>
