@@ -6,6 +6,10 @@ class Skill < ApplicationRecord
   validates :title, presence: true
 
   def self.unassigned
-    Skill.all.where(workshop_id: nil)
+    self.where(workshop_id: nil)
+  end
+
+  def self.experts(skill)
+    User.joins(:user_skills).where(user_skills: {skill_level: :expert, skill_id: skill.id})
   end
 end

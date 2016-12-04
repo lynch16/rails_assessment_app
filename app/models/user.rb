@@ -63,6 +63,10 @@ class User < ApplicationRecord
     end
   end
 
+  def self.total_members
+    count
+  end
+
   def self.search_by(field, value)
     where(field => value)
   end

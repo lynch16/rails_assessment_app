@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :workshops do
     resources :skills, only: [:new, :create, :edit, :update, :destroy]
-    resources :users, only: [:edit]
+    resources :users, only: [:show, :edit, :update]
   end
 
   resources :skills, only: [:edit, :destroy]

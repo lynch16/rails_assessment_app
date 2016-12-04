@@ -1,9 +1,10 @@
 <div class="text-center">
   Welcome to Manchester Makerspace <br>
 
-  Number of Members: <%=User.all.count%> <br>
-  Number of Workshops: <%=Workshop.all.count%> <br>
-
+  <% if user_signed_in? && is_admin?%>
+    Number of Members: <%=User.total_members%> <br>
+    Number of Workshops: <%=Workshop.total_workshops%> <br>
+  <% end %>
 
   <%= render '/layouts/auth' %>
 </div>

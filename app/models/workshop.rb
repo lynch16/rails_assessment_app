@@ -14,4 +14,18 @@ class Workshop < ApplicationRecord
       end
     end
   end
+
+  def self.total_workshops
+    count
+  end
+
+  def officer=(officer)
+    self.skills.each do |skill|
+      if !officer.skills.include?(skill)
+        officer.skills << skill
+      end
+      UserSkill.find_by(user_id: officer.id, skill_id: skill.id).make_expert
+    end
+    officer
+  end
 end

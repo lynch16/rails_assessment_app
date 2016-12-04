@@ -11,6 +11,7 @@
     <caption>Required Skills</caption>
     <tr>
       <th>Title</th>
+      <th>Experts</th>
       <% if is_officer? || is_admin? %>
         <th>Edit</th>
         <th>Delete</th>
@@ -26,6 +27,7 @@
       <%@workshop.skills.each do |skill|%>
       <tr>
         <td><%=skill.title%> </td>
+        <td><%=Skill.experts(skill).pluck(:name).join(", ")%> </td>
         <% if is_officer? || is_admin? %>
           <td><%= link_to "Edit Skill", edit_workshop_skill_path(@workshop, skill), class: "btn btn-warning"  %> </td>
           <td><%= link_to "Remove Skill", workshop_skill_path(@workshop, skill), :method => :delete, class: "btn btn-danger"  %> </td>
