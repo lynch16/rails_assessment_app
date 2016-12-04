@@ -11,6 +11,7 @@ class SkillsController < ApplicationController
     if @skill.save
       redirect_to workshop_path(@skill.workshop_id), notice: 'New skill created successfully'
     else
+      @workshop = Workshop.find_by(id: params[:workshop_id])
       render action: 'new', alert: "Creation failed:  #{@skill.errors.full_messages}"
     end
   end

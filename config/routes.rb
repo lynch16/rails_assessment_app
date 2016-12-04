@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :skills
   end
 
-  resources :workshops, except: [:new, :create] do
+  resources :workshops do
     resources :skills, only: [:new, :create, :edit, :update, :destroy]
     resources :users, only: [:edit]
   end

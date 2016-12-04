@@ -28,8 +28,8 @@
     <%end%>
   </div>
 
-  <% if controller.action_name == 'new'%>
-    <%= f.submit "Create New Skill", url: new_workshop_skill_path(@workshop, @skill) %>
+  <% if !@skill.persisted?%>
+    <%= f.submit "Create New Skill", url: new_workshop_skill_path(@workshop) %>
   <% else%>
     <%= f.submit "Update Skill", url: edit_workshop_skill_path(@workshop, @skill)  %>
     <%= link_to "Remove Skill", workshop_skill_path(@workshop, @skill), :method => :delete, class: "btn btn-danger"  %>

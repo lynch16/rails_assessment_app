@@ -9,12 +9,14 @@ Devise.setup do |config|
   # config.secret_key = '55e894627f2c4a5215817a806061c827ef618079953c98e64f0584c50fb8c29239c7d5e181743745d70e4a915662360e97555378198466fe7af1346da05ece1e'
 
   # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in Devise::Mailer,
+  # Configure the e-mail address which will be shown in Devise::Mailer,q
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   require 'omniauth-google-oauth2'
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], provider_ignores_state: true, name: 'google', prompt: 'consent'
+  require 'omniauth-slack'
+  config.omniauth :slack, ENV["SLACK_APP_ID"], ENV["SLACK_APP_SECRET"],  scope: "identity.basic", prompt: 'consent'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
