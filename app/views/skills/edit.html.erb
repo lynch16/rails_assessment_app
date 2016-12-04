@@ -1,1 +1,5 @@
-<%= render 'form' %>
+<% if !!@workshop %>
+  <%= render 'skill_form' %>
+<% else %>
+  <%= render 'workshop_skill_form' %>
+<% end %>

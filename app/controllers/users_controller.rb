@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @workshops = Workshop.all
+    @workshops = Workshop.all.sort_by(&:name)
   end
 
   def edit

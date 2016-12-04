@@ -13,12 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :workshops, except: [:new, :create] do
-    resources :skills, only: [:index, :new, :create, :edit, :destroy]
+    resources :skills, only: [:new, :create, :edit, :update, :destroy]
     resources :users, only: [:edit]
   end
 
-  resources :skills, only: [:edit, :update]
+  resources :skills, only: [:edit, :destroy]
 
   post '/users/search_by', to: 'users#search_by'
-  delete '/skills/:id/destroy', to: 'skills#destroy', as: 'destroy_skill'
 end

@@ -1,9 +1,9 @@
 
 
 <% if user_signed_in? %>
-Signed in as <%= current_user.name %>. Not you?
+Signed in as <%= current_user.name %>.
 <%= link_to "Sign out", destroy_user_session_path,:method => :delete, class: "btn btn-primary"  %>
-<%= link_to "View Profile", user_path(current_user), class: "btn btn-primary" %>
+<%= link_to "Edit Account", edit_user_registration_path(current_user), class: "btn btn-primary" %>
 <% else %>
 <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary"  %> or
 <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary"  %> or
