@@ -1,4 +1,7 @@
-<%= link_to "Create New Workshop", new_workshop_path, class: "btn btn-primary" %>
+<% if is_admin? %>
+  <%= link_to "Create New Workshop", new_workshop_path, class: "btn btn-primary" %>
+<% end %>
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <% @workshops.each do |workshop| %>
   <div class="panel panel-default">
@@ -15,7 +18,7 @@
           <% if is_officer?(workshop) %>
             <li><%= link_to skill.title, edit_workshop_skill_path(workshop, skill) %></li>
           <% else %>
-            <li><%= skill.title %></li>
+            <li  class= "<%=current_user.skill_level(skill)%>" ><%= skill.title %></li>
           <%end%>
         <% end %>
       </div>
@@ -36,7 +39,7 @@
       <div id="collapseOther" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOther">
         <div class="panel-body">
           <% Skill.unassigned.each do |skill| %>
-              <li><%= link_to skill.title, edit_skill_path(skill) %></li>
+              <li><%= link_to skill.title, edit_skill_path(skill), class: "#{current_user.skill_level(skill)}"  %></li>
             <%end%>
         </div>
       </div>

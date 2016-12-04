@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   private
   def is_officer?
-    unless current_user.admin? || @workshop.officer == current_user
+    unless current_user.admin? || @workshop.try(:officer) == current_user
       redirect_to root_path, alert: "You are not allowed to access that page."
     end
   end

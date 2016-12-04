@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root to: 'application#index'
 
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show]
 
   namespace :admin  do
     resources :users

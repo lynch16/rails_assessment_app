@@ -16,7 +16,7 @@ Devise.setup do |config|
   require 'omniauth-google-oauth2'
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], provider_ignores_state: true, name: 'google', prompt: 'consent'
   require 'omniauth-slack'
-  config.omniauth :slack, ENV["SLACK_APP_ID"], ENV["SLACK_APP_SECRET"],  scope: "identity.basic", prompt: 'consent'
+  config.omniauth :slack, ENV["SLACK_APP_ID"], ENV["SLACK_APP_SECRET"], team: 'T050A223A', scope: "identify", prompt: 'consent'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

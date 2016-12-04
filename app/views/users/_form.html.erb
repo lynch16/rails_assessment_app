@@ -13,18 +13,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <h4><%= f.label :name %>
-    <%= f.text_field :name %> </h4>
-  </div>
-
-  <h4><%= f.label 'Skills:' %> </h4>
-  <% Workshop.all.each do |workshop| %>
-    <h5>Workshop: <%= f.label workshop.name %> </h5>
-
-    <div class="form-group checkbox-list well">
-      <%= f.collection_check_boxes :skill_ids, workshop.skills, :id, :title %>
+    <div class="field">
+      <h4><%= f.label :name %>
+      <%= f.text_field :name %> </h4>
     </div>
+
+    <h4><%= f.label 'Skills:' %> </h4>
+    <% Workshop.all.each do |workshop| %>
+      <h5>Workshop: <%= f.label workshop.name %> </h5>
+
+      <div class="form-group checkbox-list well">
+        <%= f.collection_check_boxes :skill_ids, workshop.skills, :id, :title %>
+      </div>
+    <% end %>
   <% end %>
   <br>
   <%= f.submit "Update User" %>

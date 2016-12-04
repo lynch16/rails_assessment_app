@@ -1,3 +1,5 @@
+require 'net/http'
+
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google
@@ -13,7 +15,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def slack
-    binding.pry
     @user = User.find_for_slack(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
