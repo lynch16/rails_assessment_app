@@ -1,6 +1,6 @@
 class MyValidator < ActiveModel::Validator
   def validate(record)
-    unless !record.name.nil? 
+    unless !record.name.nil?
       record.errors[:name] << "cannot be blank"
     end
   end
@@ -24,7 +24,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
-    binding.pry
     data = access_token.info
     user = User.where(:provider => access_token.provider, :uid => access_token.uid ).first
     if user
