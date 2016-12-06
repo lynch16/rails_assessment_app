@@ -25,15 +25,17 @@
   <div class="well">
     <%= f.collection_check_boxes(:skill_ids, @workshop.skills, :id, :title) do |b| %>
       <ul>
-      <%=  b.label(:"data-value" => b.value) { b.check_box + b.text } %>
 
       <% if f.object.skills.include?(b.object) %>
+        <%= b.label(:"data-value" => b.value) %>
         <%= f.fields_for :user_skills do |ff| %>
             <% if ff.object.skill == b.object %>
               <%= ff.select(:skill_level, [:novice, :pro, :expert]) %>
             <% end %>
         <% end %>
-      <%end %>
+      <% else %>
+      <%=  b.label(:"data-value" => b.value) { b.check_box + b.text } %>
+      <%end%>
       </ul>
     <% end %>
   </div>

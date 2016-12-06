@@ -18,6 +18,7 @@ class User < ApplicationRecord
   validates :name, format: { without: /[0-9]/, message: "does not allow numbers" }
   validates :email, uniqueness: true
 
+  accepts_nested_attributes_for :skills, allow_destroy: true,  :reject_if => proc { |attributes| attributes['title'].blank? }
   accepts_nested_attributes_for :user_skills, allow_destroy: true
 
   # Include default devise modules. Others available are:
@@ -31,6 +32,16 @@ class User < ApplicationRecord
        if !!user_skill
          user_skill.skill_level = user_skill_attributes[:skill_level]
          user_skill.save
+       end
+     end
+   end
+
+   def skill_ids=(skill_ids)
+     skill_ids.each do |skill_id|
+       skill = Skill.find_by(id: skill_id)
+       if !!skill && !self.skills.include?(skill)
+         self.skills << skill
+         self.save
        end
      end
    end

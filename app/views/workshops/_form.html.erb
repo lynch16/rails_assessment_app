@@ -10,13 +10,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
 
-  <br>
-  <h3> Skills: </h3>
+  <h3><%= f.object.name%></h3>
+
+  <h4> Skills: </h4>
   <% if @workshop.skills.size == 0 %>
       No skills found.
   <% else %>

@@ -18,14 +18,7 @@ class WorkshopsController < ApplicationController
 
   def update
     if @workshop.update(workshop_params)
-      officer = User.find_by(id: params[:workshop][:user_id])
-      if !!officer
-        if @workshop.update(officer: officer)
-          redirect_to @workshop, notice: 'Workshop updated'
-        end
-      else
       redirect_to @workshop, notice: 'Workshop updated'
-      end
     else
       render action: 'edit', alert: "Update failed:  #{@workshop.errors.full_messages}"
     end

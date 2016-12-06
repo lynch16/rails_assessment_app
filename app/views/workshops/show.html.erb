@@ -2,9 +2,13 @@
 <% if !@workshop.officer.nil? %>
   <h3><%= "Officer: #{@workshop.officer.name}"%></h3>
 <%end%>
-<% if is_officer? || is_admin? %>
+<% if is_officer? && !is_admin? %>
   <%= link_to "Add New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"  %>
   <%= link_to "Edit Workshop", edit_workshop_path(@workshop), class: "btn btn-primary"  %>
+<% end %>
+<% if is_admin? %>
+  <%= link_to "Add New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"  %>
+  <%= link_to "Edit Workshop", edit_admin_workshop_path(@workshop), class: "btn btn-primary"  %>
 <% end %>
 <table class="table table-bordered table-striped">
   <thead>

@@ -1,6 +1,6 @@
 <%= form_for [:admin, @workshop] do |f| %>
-<% if @workshop.errors.any? %>
-  <div id="error_explanation">
+  <% if @workshop.errors.any? %>
+    <div id="error_explanation">
     <h2>There were some errors:</h2>
     <ul>
       <% @workshop.errors.full_messages.each do |message| %>
@@ -16,7 +16,6 @@
   </div>
 
   <br>
-  <% if is_admin? %>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOfficer">
@@ -35,8 +34,29 @@
       </div>
     </div>
   </div>
-  <% end %>
 
+  <h4> Skills: </h4>
+  <% if @workshop.skills.size == 0 %>
+      No skills found.
+  <% else %>
+    <div class="field checkbox-list well">
+      <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
+    </div>
+  <%end%>
+
+  <h4>Create new skill(s): <h4>
+  <div class="form-group">
+    <%= f.nested_fields_for :skills, @workshop.skills.build do |skills_fields| %>
+      <%= skills_fields.remove_nested_fields_link %>
+
+      <%=skills_fields.label :title %>
+      <%=skills_fields.text_field :title %>
+
+      <%=skills_fields.label :description %>
+      <%=skills_fields.text_field :description %>
+    <% end %>
+    <%= f.add_nested_fields_link :skills %>
+  </div>
 
   <div class="actions">
    <%= f.submit %>

@@ -1,5 +1,5 @@
 class Admin::WorkshopsController < AdminController
-
+  before_action :set_workshop, only: [:edit, :update]
   def new
     @workshop = Workshop.new
   end
@@ -13,8 +13,24 @@ class Admin::WorkshopsController < AdminController
     end
   end
 
+  def edit
+    @workshop = Workshop.find_by(id: params[:id])
+  end
+
+  def update
+    if @workshop.update(workshop_params)
+      redirect_to @workshop, notice: 'Workshop updated'
+    else
+      render action: 'edit', alert: "Update failed:  #{@workshop.errors.full_messages}"
+    end
+  end
+
   private
   def workshop_params
-    params.require(:workshop).permit(:name, :user_id)
+    params.require(:workshop).permit(:name, :user_id, :skills_attributes => [:title, :content, :_destroy])
+  end
+
+  def set_workshop
+    @workshop = Workshop.find(params[:id])
   end
 end
