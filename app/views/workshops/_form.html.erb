@@ -1,14 +1,14 @@
 <%= form_for @workshop do |f| %>
-<% if @workshop.errors.any? %>
-  <div id="error_explanation">
-    <h2>There were some errors:</h2>
-    <ul>
-      <% @workshop.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+  <% if @workshop.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @workshop.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :name %>
@@ -16,36 +16,13 @@
   </div>
 
   <br>
-  <% if is_admin? %>
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOfficer">
-        <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOfficer" aria-expanded="false" aria-controls="collapseOfficer">
-            <%="Select Officer: "%> (Click to view list)
-          </a>
-        </h4>
-      </div>
-      <div id="collapseOfficer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOfficer">
-        <div class="panel-body">
-          <div class="field checkbox-list well">
-            <%= f.collection_radio_buttons :user_id, User.all, :id, :name %>
-          </div>
-        </div>
-      </div>
+  <h3> Skills: </h3>
+  <% if @workshop.skills.size == 0 %>
+      No skills found.
+  <% else %>
+    <div class="field checkbox-list well">
+      <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
     </div>
-  </div>
-  <% end %>
-
-  <% if controller.action_name == 'edit'%>
-    <h3> Skills: </h3>
-    <% if @workshop.skills.size == 0 %>
-        No skills found.
-    <% else %>
-      <div class="field checkbox-list well">
-        <%= f.collection_check_boxes :skill_ids, @workshop.skills, :id, :title %>
-      </div>
-    <%end%>
   <%end%>
 
   <h4>Create new skill(s): <h4>

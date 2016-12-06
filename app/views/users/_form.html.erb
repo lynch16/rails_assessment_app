@@ -1,6 +1,6 @@
 <div class="form-group">
 
-<%= form_for @user do |f| %>
+<%= form_for [@workshop, @user] do |f| %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -13,20 +13,31 @@
     </div>
   <% end %>
 
-    <div class="field">
-      <h4><%= f.label :name %>
-      <%= f.text_field :name %> </h4>
-    </div>
+  <%= hidden_field_tag 'workshop_id', @workshop.id %>
 
-    <h4><%= f.label 'Skills:' %> </h4>
-    <% Workshop.all.each do |workshop| %>
-      <h5>Workshop: <%= f.label workshop.name %> </h5>
+  <div class="field">
+    <h4><%= f.label :name %>
+    <%= @user.name %> </h4>
+  </div>
 
-      <div class="form-group checkbox-list well">
-        <%= f.collection_check_boxes :skill_ids, workshop.skills, :id, :title %>
-      </div>
+  <h4><%= f.label 'Skills:' %> </h4>
+  <h5>Workshop: <%= f.label @workshop.name %> </h5>
+  <div class="well">
+    <%= f.collection_check_boxes(:skill_ids, @workshop.skills, :id, :title) do |b| %>
+      <ul>
+      <%=  b.label(:"data-value" => b.value) { b.check_box + b.text } %>
+
+      <% if f.object.skills.include?(b.object) %>
+        <%= f.fields_for :user_skills do |ff| %>
+            <% if ff.object.skill == b.object %>
+              <%= ff.select(:skill_level, [:novice, :pro, :expert]) %>
+            <% end %>
+        <% end %>
+      <%end %>
+      </ul>
     <% end %>
-  <% end %>
+  </div>
+
   <br>
   <%= f.submit "Update User" %>
 <% end %>

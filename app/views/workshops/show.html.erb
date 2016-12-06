@@ -21,7 +21,11 @@
   <tbody>
     <% if @workshop.skills.size == 0 %>
       <tr>
-        <td colspan="6">No skills found. <%= link_to "Create New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"%></td>
+        <td colspan="6">No skills found.
+          <% if is_officer? || is_admin? %>
+            <%= link_to "Create New Skill", new_workshop_skill_path(@workshop), class: "btn btn-primary"%>
+          <%end%>
+        </td>
       </tr>
     <% else %>
       <%@workshop.skills.each do |skill|%>

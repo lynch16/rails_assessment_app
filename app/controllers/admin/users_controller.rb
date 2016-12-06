@@ -1,10 +1,18 @@
-class UsersController < ApplicationController
+class Admin::UsersController < AdminController
   before_action :set_user, only: [:show, :edit, :update, :allowed?]
   before_action :set_workshop, only: [:edit]
-  before_action :allowed?, only: [:edit, :update]
 
-  def index
-    @users = User.all
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to @user, notice: 'User created successfully'
+    else
+      render action: 'new', alert: "Creation failed:  #{@user.errors.full_messages}"
+    end
   end
 
   def show
@@ -22,15 +30,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def search_by
-    if params[:value].empty?
-      redirect_to users_path and return
-    else
-      @users = User.search_by(params[:field], params[:value])
-      render 'index' and return
-    end
-  end
-
   private
   def user_params
     params.require(:user).permit(:name, :email, :skill_ids =>[], :user_skills_attributes => [:skill_level, :id])
@@ -42,12 +41,5 @@ class UsersController < ApplicationController
 
   def set_workshop
     @workshop = Workshop.find_by(id: params[:workshop_id])
-  end
-
-  def allowed?
-    set_workshop
-    unless current_user.try(:admin?) || @user == current_user || @workshop.try(:officer) == current_user
-      redirect_to root_path, alert: "You are not allowed to access that page."
-    end
   end
 end

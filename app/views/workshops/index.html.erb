@@ -1,5 +1,5 @@
 <% if is_admin? %>
-  <%= link_to "Create New Workshop", new_workshop_path, class: "btn btn-primary" %>
+  <%= link_to "Create New Workshop", new_admin_workshop_path, class: "btn btn-primary" %>
 <% end %>
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -14,6 +14,9 @@
     </div>
     <div id="collapse<%=workshop.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=workshop.id%>">
       <div class="panel-body">
+        <% if workshop.skills.size == 0 %>
+            No skills for this workshop
+        <% end %>
         <% workshop.skills.each do |skill| %>
           <% if is_officer?(workshop) %>
             <li><%= link_to skill.title, edit_workshop_skill_path(workshop, skill) %></li>

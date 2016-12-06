@@ -1,5 +1,5 @@
 class WorkshopsController < ApplicationController
-  before_action :set_workshop, only: [:show, :edit, :update, :is_officer?, :select_officer]
+  before_action :set_workshop, only: [:show, :edit, :update, :is_officer?]
   before_action :is_officer?, only: [:edit, :new, :update, :create]
 
   def index
@@ -11,19 +11,6 @@ class WorkshopsController < ApplicationController
   end
 
   def show
-  end
-
-  def new
-    @workshop = Workshop.new
-  end
-
-  def create
-    @workshop = Workshop.new(workshop_params)
-    if @workshop.save
-      redirect_to @workshop, notice: 'Workshop created successfully'
-    else
-      render action: 'new', alert: "Creation failed:  #{@workshop.errors.full_messages}"
-    end
   end
 
   def edit
