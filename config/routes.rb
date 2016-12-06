@@ -11,15 +11,14 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :users, only: [:show]
     resources :skills, only: [:edit, :destroy]
+    resources :workshops, except: [:new, :create] do
+      resources :skills, only: [:new, :create, :edit, :update, :destroy]
+      resources :users, only: [:show, :edit, :update]
+    end
   end
 
   namespace :admin  do
     resources :users, only: [:show, :edit, :update]
     resources :workshops, only: [:new, :create]
-  end
-
-  resources :workshops, except: [:new, :create] do
-    resources :skills, only: [:new, :create, :edit, :update, :destroy]
-    resources :users, only: [:show, :edit, :update]
   end
 end
