@@ -3,7 +3,7 @@ class Skill < ApplicationRecord
   has_many :user_skills
   has_many :users, through: :user_skills
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
 
   def self.unassigned
     self.where(workshop_id: nil)

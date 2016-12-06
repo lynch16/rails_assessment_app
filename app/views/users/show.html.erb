@@ -13,7 +13,9 @@
           <h4 class="panel-title <%=@user.has_workshop(workshop)%>">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=workshop.id%>" aria-expanded="false" aria-controls="collapse<%=workshop.id%>">
               <%=workshop.name %>
-              <%= is_officer?(workshop) ? (link_to "Train", edit_workshop_user_path(workshop),  class: "btn btn-info") : ""%>
+              <% if is_officer?(workshop) || workshop.expert?(current_user) %>
+                <%= (link_to "Train", edit_workshop_user_path(workshop),  class: "btn btn-info")%>
+              <% end %>
             </a>
           </h4>
         </div>

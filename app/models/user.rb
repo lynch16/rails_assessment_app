@@ -99,7 +99,9 @@ class User < ApplicationRecord
   end
 
   def allowed_workshops
-    workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact.uniq.sort_by(&:name)
+    allowed = workshops.collect { |workshop| workshop.skills.all? { |skill| self.skills.include?(skill) } ? workshop : nil}.compact.uniq
+    allowed << Workshop.select { |shop| shop.officer == self}
+    allowed.flatten.uniq.sort_by(&:name)
   end
 
   def skill_level(skill)

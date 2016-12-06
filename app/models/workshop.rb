@@ -20,4 +20,8 @@ class Workshop < ApplicationRecord
     end
     officer
   end
+
+  def expert?(user)
+      self.skills.all? { |skill| Skill.experts(skill).include?(user) }
+  end
 end
