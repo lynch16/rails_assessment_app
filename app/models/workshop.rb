@@ -3,7 +3,7 @@ class Workshop < ApplicationRecord
   has_many :users, through: :skills
   belongs_to :officer, class_name: 'User', foreign_key: 'user_id'
 
-  accepts_nested_attributes_for :skills, allow_destroy: true
+  accepts_nested_attributes_for :skills, allow_destroy: true,  :reject_if => proc { |attributes| attributes['title'].blank? }
 
   validates :name, presence: :true, uniqueness: :true
 

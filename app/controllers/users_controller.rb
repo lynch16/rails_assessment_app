@@ -33,7 +33,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :skill_ids =>[])
+    binding.pry
+    params.require(:user).permit(:name, :email, :skill_ids =>[], :user_skills_attributes => [:skill_level, :id])
   end
 
   def set_user
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
 
   def allowed?
     set_workshop
-    unless current_user.admin? || @user == current_user || @workshop.try(:officer) == current_user
+    unless current_user.try(:admin?) || @user == current_user || @workshop.try(:officer) == current_user
       redirect_to root_path, alert: "You are not allowed to access that page."
     end
   end

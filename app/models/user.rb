@@ -18,10 +18,22 @@ class User < ApplicationRecord
   validates :name, format: { without: /[0-9]/, message: "does not allow numbers" }
   validates :email, uniqueness: true
 
+  accepts_nested_attributes_for :user_skills, allow_destroy: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+   def user_skills_attributes=(user_skills_attributes)
+     user_skills_attributes.values.each do |user_skill_attributes|
+       user_skill = UserSkill.find_by(id: user_skill_attributes[:id])
+       if !!user_skill
+         user_skill.skill_level = user_skill_attributes[:skill_level]
+         user_skill.save
+       end
+     end
+   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -82,7 +94,7 @@ class User < ApplicationRecord
   def skill_level(skill)
       user_skill = UserSkill.find_by(user_id: self.id, skill_id: skill.id)
       if !user_skill
-        "unskilled"
+        :unskilled
       else
         user_skill.skill_level
       end
@@ -93,13 +105,6 @@ class User < ApplicationRecord
       "skilled"
     else
       "unskilled"
-    end
-  end
-
-  def teach_skill(student, current_user, skill)
-    teacher_skill = UserSkill.find_by(user_id: current_user.id, skill_id: skill.id)
-    unless !teacher_skill.expert?
-      student.skills << skill
     end
   end
 end
