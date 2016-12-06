@@ -1,5 +1,3 @@
-require 'net/http'
-
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google
@@ -18,7 +16,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_slack(request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Slack"
       session[:user_id] = @user.id
       sign_in_and_redirect @user, :event => :authentication
     else
