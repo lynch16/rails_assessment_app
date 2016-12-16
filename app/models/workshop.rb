@@ -11,7 +11,9 @@ class Workshop < ApplicationRecord
     count
   end
 
-  def officer=(officer)
+  def user_id=(officer_id)
+    officer = User.find_by(id: officer_id)
+    self.officer = officer
     self.skills.each do |skill|
       if !officer.skills.include?(skill)
         officer.skills << skill
